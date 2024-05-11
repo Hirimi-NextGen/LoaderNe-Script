@@ -1,3 +1,5 @@
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CameraShaker:Stop()
 function GetDistance(q)
     if typeof(q) == "CFrame" then
         return game.Players.LocalPlayer:DistanceFromCharacter(q.Position)
@@ -6,7 +8,6 @@ function GetDistance(q)
     end
 end
 local ListNPC = {}
-
 function GetNPCInTable(Table) 
     for k,v in Table do 
         if v:FindFirstChild("Head") then 
@@ -249,36 +250,6 @@ function CheckEnemySpawns(b)
         end
     end
 end
-local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
-CameraShaker:Stop()
--- function ToTween(Pos, Speed)
---     if not Speed or Speed == nil then
---         Speed = 300
---     end
---     Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
---     if Distance <= 160 then
---         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Pos
---     end
---     if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold") then
---         local Hold = Instance.new("BodyVelocity", game.Players.LocalPlayer.Character.HumanoidRootPart)
---         Hold.Name = "Hold"
---         Hold.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
---         Hold.Velocity = Vector3.new(0, 0, 0)
---     else
---         game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("Hold"):Destroy()
---     end
---     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
---         if v:IsA("BasePart") then
---             v.CanCollide = false
---         end
---     end
---     tween = game:GetService("TweenService"):Create(
---         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
---         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
---         {CFrame = Pos}
---     )
---     tween:Play()
--- end
 function ToTween(Pos, Speed)
     local r = game.Players.LocalPlayer
     if not Speed or Speed == nil then
@@ -296,7 +267,7 @@ function ToTween(Pos, Speed)
     end
     local Tween_Service = game:GetService("TweenService")
     local TweenPosition = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    local Magnitude=TweenInfo.new((game.Players.LocalPlayer.Character.Root.Position-Pos.Position).Magnitude/Speed,Enum.EasingStyle.Linear)
+    local Magnitude = TweenInfo.new((game.Players.LocalPlayer.Character.Root.Position-Pos.Position).Magnitude/Speed,Enum.EasingStyle.Linear)
     local function PartToPlayers()
         game.Players.LocalPlayer.Character.Root.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     end
